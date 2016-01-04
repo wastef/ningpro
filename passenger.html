@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>大数据-客流分析</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/page/passenger.css"/>
+</head>
+<body>
+<div class="container-fluid header ">
+    <div class="row region-search">
+        <div class="tools-con panel-group clearfix">
+            <input type="text" class="form-control pull-left  city center" placeholder="请输入查询区域">
+            <button type="button" id="search" class="btn btn-primary pull-left center">Search</button>
+            <div id="date">
+                <input type="text" value="" id="dateBefore"  class="date"/>
+                <span id="date0">至</span>
+                <input type="text" value="" id="dateAfter"  class="date"/>
+                <span class="cursor">7天</span>
+                <span class="cursor">14天</span>
+                <span class="cursor ">30天</span>
+                <span class="cursor current">90天</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid header target">
+    <h2>到达人流趋势</h2>
+    <div class="btn-group tab" role="group" aria-label="Default button group">
+        <button type="button" class="btn btn-default current space" data-type="HOUR">按时</button>
+        <button type="button" class="btn btn-default  space" data-type="DAY">按天</button>
+        <button type="button" class="btn btn-default space" data-type="WEEK">按周</button>
+        <button type="button" class="btn btn-default space" data-type="MONTH">按月</button>
+    </div>
+    <div id="lineChart"></div>
+    <div id="slider-range"></div>
+</div>
+<div class="content_div Usertransform">
+    <div class="container-fluid user-transformation">
+        <div class="row region-search">
+            <h2>用户转化漏斗</h2>
+            <div class="labelled">注：标 <div class="yellow-block"></div> 为选中部分</div>
+            <div id="FunnelChart"></div>
+        </div>
+    </div>
+    <div class="container-fluid user-area">
+        <div class="row region-search">
+            <h2>用户区域分布</h2>
+        </div>
+        <div class="map_case">
+            <div class="btn_group">
+                <div class="classification curr" >热力</div>
+                <div class="classification" >常驻地区</div>
+            </div>
+            <div class="side">
+                <div class="row goInOutTabs">
+                    <ul class="nav nav-tabs nav-justified" role="tablist" id="nav">
+                        <li role="presentation" ><a role="tab" data-toggle="tab" data-type="0" href="#goin">城市</a></li>
+                        <li role="presentation"><a role="tab" data-toggle="tab" data-type="1" href="#goout">区县</a></li>
+                        <li role="presentation"><a role="tab" data-toggle="tab" data-type="2" href="#goout">商圈</a></li>
+                        <li role="presentation" class="active"><a role="tab" data-toggle="tab" data-type="3" href="#goout">小区</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="goin">
+                            <ul></ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="goout">
+                            <ul></ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane active" >
+                            <ul>
+                                <li class="row">
+                                    <span class="hd-name">排名</span>
+                                    <span class="hotTrend hd-city">名称</span>
+                                    <span class="hd-per">用户量</span>
+                                    <span class="hd-per">占比(%)</span>
+                                    <span class="hd-per">总比(%)</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">1</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">2</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">3</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">4</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">5</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">6</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">7</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">8</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">9</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+                                <li class="row space">
+                                    <span class="text-center serial-number">10</span>
+                                    <span class="content-city">朝阳区</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                    <span class="per">4.79</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="level">
+                <div class="colorValue" style="background-color: #ff0000"></div>
+                <div class="colorValue" style="background-color: #ff4f00"></div>
+                <div class="colorValue" style="background-color: #ffb400"></div>
+                <div class="colorValue" style="background-color: #fff700"></div>
+                <div class="colorValue" style="background-color: #adff00"></div>
+                <div class="colorValue" style="background-color: #47ff00"></div>
+                <div class="colorValue" style="background-color: #00ff34"></div>
+                <div class="colorValue" style="background-color: #00ffb0"></div>
+                <div class="colorValue" style="background-color: #00ffff"></div>
+                <div class="colorValue" style="background-color: #00b0ff"></div>
+            </div>
+            <div class="distance">
+                <div class="distanceChange curr" data-view_size="0">10</div>
+                <div class="distanceChange" data-view_size="1">100</div>
+                <div class="distanceChange" data-view_size="2">1000</div>
+            </div>
+            <div id="userAreaMap"></div>
+        </div>
+
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<div class="container-fluid heat internal-heat">
+    <div class="row region-search">
+        <h2>内部热度分布</h2>
+        <div class="tools-con">
+
+        </div>
+        <div id="time-panel" class="time-panel-hour" >
+            <div class="time-panel-title">
+                <span class="time-panel-date">2015.11.23</span>
+                <span class="time-panel-time">11:33</span>
+            </div>
+            <div class="time-panel-control">
+                <div class="time-panel-progress-container">
+                    <div class="time-panel-progress-bar">
+                        <span class="time-panel-progress" ></span>
+                    </div>
+                    <div class="time-panel-progress-text">
+                        <span class="time-panel-progress-tick">4</span>
+                        <span class="time-panel-progress-tick">5</span>
+                        <span class="time-panel-progress-tick">6</span>
+                        <span class="time-panel-progress-tick">7</span>
+                        <span class="time-panel-progress-tick">8</span>
+                        <span class="time-panel-progress-tick">9</span>
+                        <span class="time-panel-progress-tick">10</span>
+                        <span class="time-panel-progress-tick">11</span>
+                    </div>
+                </div>
+                <div class="time-panel-btn play"></div>
+            </div>
+        </div>
+        <div id="map-canvas"></div>
+    </div>
+</div>
+<div class="container-fluid industry">
+    <div class="row region-search">
+        <h2>周边行业分析</h2>
+        <div class="tools-con">
+            <ul class="">
+                <li data-query="美食" data-color="#f44848">美食</li>
+                <li data-query="酒店" data-color="#f4a548">酒店</li>
+                <li data-query="教育学校" data-color="#f4e248">教育学校</li>
+                <li data-query="购物" data-color="#48f474">购物</li>
+                <li data-query="休闲娱乐" data-color="#4878f4">休闲娱乐</li>
+                <li data-query="医疗" data-color="#8548f4">医疗</li>
+            </ul>
+            <div class="radius-con">
+                <div class="mask"></div>
+                <label for="radius">当前</label><input type="text" id="radius" readonly>
+                <div id="slider"></div>
+            </div>
+        </div>
+        <div class="side-info" >
+            <div class="row goInOutTabs">
+                <ul class="nav nav-tabs nav-justified" role="tablist" >
+                    <li role="presentation"><a role="tab" data-toggle="tab" data-type="0" href="#goin">美食</a></li>
+                    <li role="presentation"><a role="tab" data-toggle="tab" data-type="1" href="#goout">酒店</a></li>
+                    <li role="presentation"><a role="tab" data-toggle="tab" data-type="2" href="#goout">教育学校</a></li>
+                    <li role="presentation" ><a role="tab" data-toggle="tab" data-type="3" href="#goout">购物</a></li>
+                    <li role="presentation"><a role="tab" data-toggle="tab" data-type="3" href="#goout">休闲娱乐</a></li>
+                    <li role="presentation" class="active"><a role="tab" data-toggle="tab" data-type="3" href="#goout">医疗</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                        <li class="row interval">
+                            <span class="hd-name-info">排名</span>
+                            <span class="hotTrend hd-city-info">名称</span>
+                        </li>
+                        <li class="row space">
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tmap-searchmap"></div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/tencentmap.js"></script>
+<script type="text/javascript" src="js/source/echarts.js"></script>
+<script type="text/javascript" src="libs/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" >
+    if(window.location.href.indexOf("target")>-1){
+        $(".Usertransform").css("display","none");
+        $(".heat").css("display","none");
+        $(".industry").css("display","none");
+        document.write('<script type="text/javascript" src="js/page/target.js"><\/script>')
+    }else if(window.location.href.indexOf("Usertransform")>-1){
+        $(".target").css("display","none");
+        $(".heat").css("display","none");
+        $(".industry").css("display","none");
+        document.write('<script type="text/javascript" src="js/page/Usertransform.js"><\/script>')
+    }else if(window.location.href.indexOf("heat")>-1){
+        $(".target").css("display","none");
+        $(".Usertransform").css("display","none");
+        $(".industry").css("display","none");
+        document.write('<script type="text/javascript" src="js/page/heat.js"><\/script>')
+    }else if(window.location.href.indexOf("industry")>-1){
+        $(".target").css("display","none");
+        $(".Usertransform").css("display","none");
+        $(".heat").css("display","none");
+        document.write('<script type="text/javascript" src="js/page/industry.js"><\/script>')
+    }else{
+        document.write('<script type="text/javascript" src="js/page/passenger.js"><\/script>')
+    }
+</script>
+</body>
+</html>
